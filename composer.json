@@ -1,0 +1,45 @@
+{
+    "name": "pheuture/pdfedittool",
+    "description": ".",
+    "license": "MIT",
+    "type": "project",
+    "keywords": [
+        "builder",
+        "library",
+        "package",
+        "skeleton",
+        "template"
+    ],
+    "authors": [
+        {
+            "name": "Yash Tiwari",
+            "email": "support@pheuture.com",
+            "homepage": "https://pheuture.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8",
+        "ext-json": "*",
+        "setasign/fpdf": "^1.8",
+        "setasign/fpdi-fpdf": "^2.3",
+        "symfony/console": "^5.2.4",
+        "symfony/filesystem": "^5.1",
+        "symfony/finder": "^5.3.7"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Vendor\\SubNamespace\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "phpstan/extension-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ergebnis/composer-normalize": true
+        },
+        "sort-packages": true
+    }
+}
