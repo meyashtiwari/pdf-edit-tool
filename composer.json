@@ -1,14 +1,12 @@
 {
     "name": "pheuture/pdfedittool",
-    "description": ".",
+    "description": "A pdf data insertion tool that uses fpdf and fpdi",
     "license": "MIT",
     "type": "project",
     "keywords": [
-        "builder",
-        "library",
-        "package",
-        "skeleton",
-        "template"
+        "pheuture",
+        "pdf",
+        "pdfedit"
     ],
     "authors": [
         {
@@ -18,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8",
+        "php": "^8",
         "ext-json": "*",
         "setasign/fpdf": "^1.8",
         "setasign/fpdi-fpdf": "^2.3",
@@ -26,12 +24,25 @@
         "symfony/filesystem": "^5.1",
         "symfony/finder": "^5.3.7"
     },
+    "require-dev": {
+        "pestphp/pest": "^1.21",
+        "vimeo/psalm": "^4.23"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Vendor\\SubNamespace\\": "src/"
+            "Pheuture\\PdfEditTool\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Pheuture\\PdfEditTool\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "analyze": "./vendor/bin/psalm --show-info=true",
+        "test": "./vendor/bin/pest"
     },
     "config": {
         "allow-plugins": {

@@ -1,43 +1,32 @@
 <?php
 
-/**
- * This file is part of pheuture/pdfedittool
- *
- * pheuture/pdfedittool is open source software: you can
- * distribute it and/or modify it under the terms of the MIT License
- * (the "License"). You may not use this file except in
- * compliance with the License.
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- * implied. See the License for the specific language governing
- * permissions and limitations under the License.
- *
- * @copyright Copyright (c) Pheuture Studio Pvt Ltd. <support@pheuture.com>
- * @license https://opensource.org/licenses/MIT MIT License
- */
-
 namespace Pheuture\PdfEditTool;
-require_once __DIR__.'/../src/Helpers/ReadDataFromCSV.php';
-require_once __DIR__.'/../vendor/autoload.php';
 
 use setasign\Fpdi\Fpdi;
-use Pheuture\Helpers\ReadDataFromCSV;
+use Pheuture\PdfEditTool\Helpers\ReadDataFromCSV;
+use Pheuture\PdfEditTool\Contracts\GeneratePdfContract;
 
-class GeneratePdf
+class GeneratePdf implements GeneratePdfContract
 {
-    public function generate($file)
+    public function makeFromCSV(string $fileName): bool
     {
-        $readData = new ReadDataFromCSV($file);
+        $readData = new ReadDataFromCSV($fileName);
         $data = $readData->getContent();
         if($data !== null) {
             array_shift($data); //Removed head from content.
 
-            array_map(function($record) {
+            array_map(function(array $record) {
                 $this->insertDataAndGeneratePdf($record);
             }, $data);
+
+            return true;
         }
+        return false;
+    }
+
+    public function make(array $dataToInsert = []): bool
+    {
+        
     }
 
     public function insertDataAndGeneratePdf($record) {
@@ -95,7 +84,6 @@ class GeneratePdf
             $pdf->AddPage();
             $pdf->useTemplate($tpl);
         }
-
 
         // save pdf
         $pdf->Output('F', __DIR__ . '/../storage/output/' . 'file-' . str_replace(' ', '-', $record[1]) . '.pdf');

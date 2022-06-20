@@ -1,3 +1,4 @@
 vendor/
 composer.lock
 storage/output/*.pdf
+.phpunit.result.cache

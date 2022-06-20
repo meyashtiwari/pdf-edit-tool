@@ -1,23 +1,18 @@
 <?php
 
-namespace Pheuture\Helpers;
+namespace Pheuture\PdfEditTool\Helpers;
 
 require_once __DIR__.'/../../vendor/autoload.php';
 
-// use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Pheuture\PdfEditTool\Contracts\ReadDataContract;
 use Symfony\Component\Filesystem\Filesystem;
-// use Symfony\Component\Filesystem\Path;
+class ReadDataFromCSV implements ReadDataContract{
 
-class ReadDataFromCSV {
+    public function __construct(
+        private string $filename
+    ){}
 
-    private $filename;
-
-    public function __construct(string $filename)
-    {
-        $this->filename = $filename;
-    }
-
-    public function getContent() {
+    public function getContent(): mixed {
         
         $filesystem = new Filesystem();
         if($filesystem->exists(__DIR__ . '/../../storage/data/' . $this->filename)) {
